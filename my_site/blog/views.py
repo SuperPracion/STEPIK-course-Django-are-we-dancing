@@ -3,8 +3,12 @@ from django.http import HttpResponse
 
 
 # Create your views here.
-def get_info_about_request(request, name_post):
-    return HttpResponse(f'Это страница {name_post}')
+def get_info_about_word(request, word: str):
+    return HttpResponse(f'Это страница {word}')
+
+
+def get_info_about_number(reqiest, number: int):
+    return HttpResponse(f'Здесь содержится информация о посте под номером {number}')
 
 
 def posts(request):
