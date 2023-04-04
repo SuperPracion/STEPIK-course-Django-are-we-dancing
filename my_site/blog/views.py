@@ -12,4 +12,5 @@ def get_info_about_number(reqiest, number: int):
 
 
 def posts(request):
-    return HttpResponse(f'Это страница posts')
+    return render(request, 'blog/list_detail.html')
+    #return HttpResponse(f'Это страница posts')

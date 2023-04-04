@@ -13,18 +13,25 @@ week_days = {
 }
 
 
-def get_info_about_day(request, day_num: int):
+# Возвращает главную страницу todo_week
+def index(request):
+    return render(request, 'week_days/greeting.html')
+
+
+# Возвращает переадресованный запрос с именем дня + url
+def get_info_about_day_number(request, day_num: int):
     if 1 <= day_num <= 7:
         day_name = list(week_days)[day_num - 1]
-        redirect_url = reverse('todo-week-name', args=(day_name, ))
+        redirect_url = reverse('todo-week-name', args=(day_name,))
         return HttpResponseRedirect(redirect_url)
     else:
         return HttpResponseNotFound(f'Неверный номер дня - {day_num}')
 
 
-# Create your views here.
-def get_info_about_week_day(request, day_str: str):
+# Возвращает информацию о дне недели
+def get_info_about_day_str(request, day_str: str):
     try:
-        return HttpResponse(week_days[day_str.lower()])
+        return render(request, 'week_days/greeting.html')
+        # return HttpResponse(week_days[day_str.lower()])
     except:
         return HttpResponseNotFound('Ты тупой?')

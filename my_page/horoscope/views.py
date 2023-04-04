@@ -27,7 +27,7 @@ types = {
 }
 
 
-# Create your views here.
+# Возвращать главную страницу со всеми знаками зодиака
 def index(request):
     li_elements = ''
     for sing in zodiac_dict:
@@ -39,6 +39,7 @@ def index(request):
     return HttpResponse(response)
 
 
+# Возвращает описание знака зодиака в зависимости от запроса
 def get_info_about_zodiac_sign(request, sign_zodiac: str):
     try:
         return HttpResponse(render_to_string('horoscope/info_zodiac.html'))
@@ -47,6 +48,7 @@ def get_info_about_zodiac_sign(request, sign_zodiac: str):
         return HttpResponseNotFound(f'Ты чо несёшь? {sign_zodiac}')
 
 
+# Возвращает новый запрос со знаком зодиака в виде строки + url корня
 def get_info_about_zodiac_sign_by_number(request, sign_zodiac: int):
     try:
         redirect_url = reverse('horoscope-name', args=(list(zodiac_dict)[sign_zodiac - 1],))
@@ -55,6 +57,7 @@ def get_info_about_zodiac_sign_by_number(request, sign_zodiac: int):
         return HttpResponseNotFound(f'Ты чо несёшь? 2.0 {sign_zodiac}')
 
 
+# Формирует страницу с гипер ссылками на знаки зодиака определённой стихии
 def get_info_about_types(request):
     response = ''
     for type in list(types):
